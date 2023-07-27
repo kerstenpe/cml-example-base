@@ -9,12 +9,13 @@ jobs:
       - uses: actions/setup-python@v4
       - uses: iterative/setup-cml@v1
       - name: Train model and reports
-        env:
-          REPO_TOKEN: ${{ secrets.TOKEN }}
-        run: |
+        run: 
+          |
           pip install -r requirements.txt
           python train.py
 
           cat metrics.txt >> report.md
           echo "![](./plot.png)" >> report.md
           cml comment create report.md
+          env:
+            GITHUB_TOKEN: ${{ github.token }}
