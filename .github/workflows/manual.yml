@@ -8,7 +8,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
       - uses: iterative/setup-cml@v1
-      - name: Train model and report
+      - name: Train model and reports
         env:
           REPO_TOKEN: ${{ secrets.TOKEN }}
         run: |
