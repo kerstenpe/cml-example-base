@@ -5,10 +5,17 @@ jobs:
     runs-on: ubuntu-latest
     permissions: write-all
     steps:
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
       - uses: iterative/setup-cml@v1
+        with:
+          version: 'latest'
       - name: Train model and reports
+        env:
+          REPO_TOKEN: ${{secrets.TOKEN}}
         run: 
           |
           pip install -r requirements.txt
@@ -17,5 +24,4 @@ jobs:
           cat metrics.txt >> report.md
           echo "![](./plot.png)" >> report.md
           cml comment create report.md
-          env:
-            GITHUB_TOKEN: ${{ github.token }}
+          
